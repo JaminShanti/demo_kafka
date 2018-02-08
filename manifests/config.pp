@@ -1,6 +1,7 @@
 class demo_kafka::config inherits demo_kafka {
 
   include nginx
+  include tomcat
 
   class { '::selinux':
     mode => 'disabled',

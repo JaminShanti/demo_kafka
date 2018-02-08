@@ -84,6 +84,7 @@ Vagrant.configure(2) do |config|
         #puppet module install puppet-alternatives --version 2.0.0    
         cp -r /vagrant/demo_kafka  /etc/puppetlabs/code/environments/production/modules
         puppet apply /etc/puppetlabs/code/environments/production/modules/demo_kafka/examples/init.pp
+        netstat -tupln
   SHELL
 
 end
