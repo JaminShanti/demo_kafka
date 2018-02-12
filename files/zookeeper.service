@@ -1,0 +1,16 @@
+[Unit]
+Description=Apache Kafka Zookeeper server
+Documentation=http://kafka.apache.org/documentation.html
+After=network.target syslog.target
+Wants=network.target syslog.target
+
+[Service]
+User=kafka
+Group=kafka
+SyslogIdentifier=kafka
+Type=simple
+ExecStart=/opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties
+ExecStop=/opt/kafka/bin/zookeeper-server-stop.sh /opt/kafka/config/zookeeper.properties
+
+[Install]
+WantedBy=multi-user.target
