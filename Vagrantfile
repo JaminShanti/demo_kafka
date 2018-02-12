@@ -70,19 +70,19 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision 'shell', inline: <<-SHELL
         # update Puppet
-        rpm --import https://yum.puppetlabs.com/RPM-GPG-KEY-puppet     
+        rpm --import https://yum.puppetlabs.com/RPM-GPG-KEY-puppet
         rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
-        yum -y -q install puppet-agent 
+        yum -y -q install puppet-agent
         source /etc/profile
         # end update puppet
-        puppet module install puppet-nginx --version 0.9.0        
+        puppet module install puppet-nginx --version 0.9.0
         puppet module install puppetlabs-tomcat --version 2.2.0
         puppet module install puppetlabs-java --version 2.4.0
         puppet module install puppet-kafka --version 5.0.0
-        puppet module install crayfishx-firewalld --version 3.4.0  
+        puppet module install crayfishx-firewalld --version 3.4.0
         puppet module install puppet-selinux --version 1.5.2
         #puppet module install puppet-alternatives --version 2.0.0    
-        rm -rf /etc/puppetlabs/code/environments/production/modulescp/demo_kafka 2> /dev/null
+        rm -rf /etc/puppetlabs/code/environments/production/modules/demo_kafka 2> /dev/null
         cp -r /vagrant/demo_kafka  /etc/puppetlabs/code/environments/production/modules
         puppet apply /etc/puppetlabs/code/environments/production/modules/demo_kafka/examples/init.pp
   SHELL

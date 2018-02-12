@@ -12,17 +12,17 @@ class demo_kafka::config inherits demo_kafka {
   }
 
   tomcat::instance { 'default':
-    catalina_home => "$tomcat_dir",
+    catalina_home => $tomcat_dir,
   }
 
-  file { "/opt/tomcat/logs":
+  file { '/opt/tomcat/logs':
     ensure    => directory,
     mode      => '0644',
     recurse   => true,
     subscribe => Tomcat::Service['default']
   }
 
-  file { "/opt/tomcat/webapps/ROOT":
+  file { '/opt/tomcat/webapps/ROOT':
     ensure    => absent,
     recurse   => true,
     purge     => true,
@@ -31,7 +31,7 @@ class demo_kafka::config inherits demo_kafka {
   }
 
   # workaround for https://github.com/puppetlabs/puppetlabs-tomcat/pull/213/files
-  file { "/opt/tomcat/conf/context.xml":
+  file { '/opt/tomcat/conf/context.xml':
     ensure  => present,
     source  => 'puppet:///modules/demo_kafka/conf/context.xml',
     require => Tomcat::Service['default'],
@@ -44,14 +44,14 @@ class demo_kafka::config inherits demo_kafka {
     protocol => 'tcp',
   }
 
-  firewalld_port { 'Open port 80 in the public zone':
+  firewalld_port { 'Open port 8084 in the public zone':
     ensure   => present,
     zone     => 'public',
     port     => 8084,
     protocol => 'tcp',
   }
 
-  firewalld_port { 'Open port 8443 in the public zone':
+  firewalld_port { 'Open port 8086 in the public zone':
     ensure   => present,
     zone     => 'public',
     port     => 8086,
@@ -71,8 +71,8 @@ class demo_kafka::config inherits demo_kafka {
     source => 'puppet:///modules/demo_kafka/jdk-7u79-linux-x64.rpm',
   }
 
-  file { [ "${companyDir}", "${certDir}", "${binLocation}", "${configLocation}", "${privateConfigLocation}",
-    "${dataLocation}"]:
+  file { [ $companyDir, $certDir, $binLocation, $configLocation, $privateConfigLocation,
+    $dataLocation]:
     ensure => directory,
 
   }

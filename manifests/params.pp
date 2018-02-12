@@ -8,13 +8,14 @@ class demo_kafka::params (
   $configLocation        = "${companyDir}/config",
   $privateConfigLocation = "${companyDir}/private",
   $dataLocation          = "${companyDir}/data",
-  $sitename              = "www.fadedflag.com",
+  $sitename              = 'www.fadedflag.com',
+  $nginxSSLPort          = 8086,
 
 )
   {
     case $::osfamily {
       'RedHat': {
-        notify { "Module demo_kafka Running on RedHat":
+        notify { 'Module demo_kafka Running on RedHat':
           name => 'Red Hat Notification demo_kafka'
         }
       }

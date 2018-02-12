@@ -4,7 +4,7 @@ class demo_kafka::service inherits demo_kafka {
 
   service { 'tomcat':
     name     => 'tomcat',
-    enable   => 'true',
+    enable   => true,
     provider => 'systemd',
   }
 
