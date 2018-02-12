@@ -14,13 +14,17 @@ class demo_kafka::websites inherits demo_kafka
     }
 
 
-    nginx::resource::server { 'kibana.myhost.com':
-      listen_port         => 80,
+    nginx::resource::server { "$sitename":
+      listen_port         => 8084,
+      ssl_port            => 8086,
       proxy               => 'http://localhost:8080',
-      #ssl                 => true,
-      #ssl_cert            => false,
-      #ssl_key             => false,
-      location_cfg_append => { 'rewrite' => '^ https://$server_name$request_uri? permanent' },
+      ssl                 => true,
+      ssl_cert            => "${certDir}/www.fadedflag.com.crt",
+      ssl_key             => "${certDir}/www.fadedflag.com.key",
+      location_cfg_append => { 'rewrite' => "^ https://${$sitename}:8086$request_uri? redirect" },
+      require             => [ File["${certDir}/www.fadedflag.com.crt"], File["${certDir}/www.fadedflag.com.key"] ]
     }
+
+
 
   }

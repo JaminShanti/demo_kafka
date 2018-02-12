@@ -17,7 +17,7 @@ class demo_kafka::config inherits demo_kafka {
 
   file { "/opt/tomcat/logs":
     ensure    => directory,
-    mode      => '0750',
+    mode      => '0644',
     recurse   => true,
     subscribe => Tomcat::Service['default']
   }
@@ -47,14 +47,14 @@ class demo_kafka::config inherits demo_kafka {
   firewalld_port { 'Open port 80 in the public zone':
     ensure   => present,
     zone     => 'public',
-    port     => 80,
+    port     => 8084,
     protocol => 'tcp',
   }
 
-  firewalld_port { 'Open port 443 in the public zone':
+  firewalld_port { 'Open port 8443 in the public zone':
     ensure   => present,
     zone     => 'public',
-    port     => 443,
+    port     => 8086,
     protocol => 'tcp',
   }
 
@@ -63,13 +63,32 @@ class demo_kafka::config inherits demo_kafka {
     version_major => '7u79',
     version_minor => 'b15',
     java_se       => 'jdk',
-    require => File['/tmp/jdk-7u79-linux-x64.rpm'],
+    require       => File['/tmp/jdk-7u79-linux-x64.rpm'],
   }
 
   file { '/tmp/jdk-7u79-linux-x64.rpm':
-    ensure    => present,
-    source  => 'puppet:///modules/demo_kafka/jdk-7u79-linux-x64.rpm',
+    ensure => present,
+    source => 'puppet:///modules/demo_kafka/jdk-7u79-linux-x64.rpm',
   }
 
+  file { [ "${companyDir}", "${certDir}", "${binLocation}", "${configLocation}", "${privateConfigLocation}",
+    "${dataLocation}"]:
+    ensure => directory,
+
+  }
+
+  file { "${certDir}/www.fadedflag.com.crt":
+    ensure    => present,
+    mode      => '0644',
+    source    => 'puppet:///modules/demo_kafka/fadedflag.com/www.fadedflag.com.crt',
+    subscribe => Tomcat::Service['default']
+  }
+
+  file { "${certDir}/www.fadedflag.com.key":
+    ensure    => present,
+    mode      => '0644',
+    source    => 'puppet:///modules/demo_kafka/fadedflag.com/www.fadedflag.com.key',
+    subscribe => Tomcat::Service['default']
+  }
 
 }

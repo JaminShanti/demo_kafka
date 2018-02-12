@@ -1,0 +1,50 @@
+{
+  "name": "demo_kafka",
+  "version": "0.0.10",
+  "author": "Jamim Shanti",
+  "summary": "Demo of Community Puppet Modules for Kafka",
+  "license": "MIT",
+  "source": "https://github.com/jaminshanti/demo_kafka",
+  "project_page": "https://github.com/jaminshanti/demo_kafka",
+  "issues_url": "https://github.com/jaminshanti/demo_kafka/issues",
+  "dependencies": [
+    {
+      "name": "puppet/nginx",
+      "version_requirement": "0.9.0"
+    },
+    {
+      "name": "puppetlabs/tomcat",
+      "version_requirement": "2.2.00"
+    },
+    {
+      "name": "puppetlabs/java",
+      "version_requirement": "2.4.0"
+    },
+    {
+      "name": "puppet/kafka",
+      "version_requirement": "5.0.0"
+    },
+    {
+      "name": "crayfishx/firewalld",
+      "version_requirement": "3.4.0"
+    },
+    {
+      "name": "puppet/selinux",
+      "version_requirement": "1.5.2"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.7.1 < 6.0.0"
+    }
+  ]
+}

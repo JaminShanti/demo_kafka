@@ -21,9 +21,9 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 80, host: 8084
-  config.vm.network "forwarded_port", guest: 443, host: 8443
+  config.vm.network "forwarded_port", guest: 8084, host: 8084, protocol: 'tcp'
   config.vm.network 'forwarded_port', guest: 8080, host: 8085, protocol: 'tcp'
+  config.vm.network "forwarded_port", guest: 8086, host: 8086, protocol: 'tcp'
   config.vm.hostname = 'devops001.vagrant.vm'
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -82,9 +82,9 @@ Vagrant.configure(2) do |config|
         puppet module install crayfishx-firewalld --version 3.4.0  
         puppet module install puppet-selinux --version 1.5.2
         #puppet module install puppet-alternatives --version 2.0.0    
+        rm -rf /etc/puppetlabs/code/environments/production/modulescp/demo_kafka 2> /dev/null
         cp -r /vagrant/demo_kafka  /etc/puppetlabs/code/environments/production/modules
         puppet apply /etc/puppetlabs/code/environments/production/modules/demo_kafka/examples/init.pp
-        netstat -tupln
   SHELL
 
 end

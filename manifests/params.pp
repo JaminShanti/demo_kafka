@@ -1,7 +1,15 @@
 class demo_kafka::params (
-  $demo_kafka_user  = kafaadmin,
-  $demo_kafka_group = kafkaadmin,
-  $tomcat_dir       = '/opt/tomcat',
+  $demo_kafka_user       = kafaadmin,
+  $demo_kafka_group      = kafkaadmin,
+  $tomcat_dir            = '/opt/tomcat',
+  $companyDir            = '/fadedflag',
+  $certDir               = "${companyDir}/sitecertificates",
+  $binLocation           = "${companyDir}/bin",
+  $configLocation        = "${companyDir}/config",
+  $privateConfigLocation = "${companyDir}/private",
+  $dataLocation          = "${companyDir}/data",
+  $sitename              = "www.fadedflag.com",
+
 )
   {
     case $::osfamily {
@@ -15,5 +23,3 @@ class demo_kafka::params (
       }
     }
   }
-
-
