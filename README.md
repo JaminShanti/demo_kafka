@@ -1,4 +1,4 @@
-# Puppept Module : demo_kafka
+# Puppet Module : demo_kafka
 
 Puppet Modues for Demoing Kafa Cluster and Sites.
 
